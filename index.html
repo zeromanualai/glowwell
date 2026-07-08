@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GlowWell — Wellness, Spa, Salon & Fitness</title>
+<meta name="description" content="GlowWell — memberships, spa treatments, salon services, wellness packages and personal training. Look good, feel well." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#faf6f0;
+    --surface:#ffffff;
+    --ink:#26221d;
+    --ink-soft:#6b6459;
+    --line:#ece4d8;
+    --gold:#c79a4b;
+    --gold-deep:#a97c2f;
+    --green:#33473a;
+    --green-soft:#4a6353;
+    --rose:#e8d3c4;
+    --shadow:0 10px 30px rgba(51,42,29,.08);
+    --shadow-lg:0 24px 60px rgba(51,42,29,.16);
+    --radius:16px;
+    --radius-sm:10px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.5rem;
+    font-family:'Manrope',sans-serif;font-weight:700;font-size:.95rem;
+    padding:.85rem 1.5rem;border-radius:999px;border:1.5px solid transparent;
+    cursor:pointer;transition:.2s ease;white-space:nowrap;
+  }
+  .btn-primary{background:var(--green);color:#fff}
+  .btn-primary:hover{background:var(--green-soft);transform:translateY(-1px)}
+  .btn-gold{background:var(--gold);color:#fff}
+  .btn-gold:hover{background:var(--gold-deep);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-deep)}
+  .btn-block{width:100%}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,246,240,.85);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-family:'Fraunces',serif;font-weight:700;font-size:1.6rem;letter-spacing:-.02em;color:var(--ink);display:flex;align-items:center;gap:.15rem}
+  .logo .dot{color:var(--gold)}
+  .logo small{font-family:'Manrope',sans-serif;font-weight:600;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);margin-left:.4rem;align-self:flex-end;padding-bottom:.35rem}
+  .nav-links{display:flex;gap:1.8rem;align-items:center}
+  .nav-links a{font-weight:600;font-size:.95rem;color:var(--ink-soft);transition:.2s}
+  .nav-links a:hover{color:var(--gold-deep)}
+  .cart-btn{position:relative;background:none;border:none;cursor:pointer;padding:.4rem;color:var(--ink)}
+  .cart-btn svg{width:26px;height:26px}
+  .cart-count{
+    position:absolute;top:-4px;right:-6px;background:var(--gold);color:#fff;
+    font-size:.68rem;font-weight:800;min-width:19px;height:19px;border-radius:999px;
+    display:flex;align-items:center;justify-content:center;padding:0 4px;font-family:'Manrope',sans-serif;
+  }
+  .menu-toggle{display:none;background:none;border:none;cursor:pointer;color:var(--ink)}
+  .menu-toggle svg{width:26px;height:26px}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;overflow:hidden}
+  .hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:70px 0 60px}
+  .hero .eyebrow{display:inline-block;font-weight:700;font-size:.75rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:1rem}
+  .hero h1{font-size:clamp(2.4rem,5vw,3.7rem);margin-bottom:1.1rem}
+  .hero h1 em{font-style:italic;color:var(--gold-deep)}
+  .hero p{font-size:1.1rem;color:var(--ink-soft);max-width:32rem;margin-bottom:1.8rem}
+  .hero-cta{display:flex;gap:.9rem;flex-wrap:wrap}
+  .hero-art{
+    position:relative;border-radius:24px;min-height:380px;overflow:hidden;
+    background:
+      radial-gradient(120% 120% at 80% 10%, rgba(199,154,75,.35), transparent 55%),
+      radial-gradient(120% 120% at 10% 90%, rgba(51,71,58,.4), transparent 50%),
+      linear-gradient(135deg,#efe3d2,#e8d3c4);
+    box-shadow:var(--shadow-lg);display:flex;align-items:flex-end;padding:28px;
+  }
+  .hero-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  .hero-art .hero-badge{position:relative;z-index:1}
+  .hero-badge{background:rgba(255,255,255,.92);border-radius:14px;padding:16px 20px;box-shadow:var(--shadow);max-width:260px}
+  .hero-badge strong{font-family:'Fraunces',serif;font-size:1.3rem;display:block}
+  .hero-badge span{font-size:.85rem;color:var(--ink-soft)}
+  .trust{display:flex;gap:2rem;flex-wrap:wrap;padding:0 0 10px;color:var(--ink-soft);font-size:.9rem;font-weight:600}
+  .trust div{display:flex;align-items:center;gap:.5rem}
+  .trust svg{width:18px;height:18px;color:var(--gold-deep)}
+
+  /* ---------- Catalog ---------- */
+  main{padding:56px 0 80px}
+  .section-head{text-align:center;max-width:36rem;margin:0 auto 34px}
+  .section-head h2{font-size:clamp(1.8rem,3.5vw,2.5rem);margin-bottom:.5rem}
+  .section-head p{color:var(--ink-soft)}
+  .filters{display:flex;gap:.6rem;flex-wrap:wrap;justify-content:center;margin-bottom:38px}
+  .chip{
+    font-family:'Manrope',sans-serif;font-weight:600;font-size:.9rem;
+    padding:.55rem 1.1rem;border-radius:999px;border:1.5px solid var(--line);
+    background:var(--surface);color:var(--ink-soft);cursor:pointer;transition:.2s;
+  }
+  .chip:hover{border-color:var(--gold)}
+  .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;display:flex;flex-direction:column;transition:.25s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .card-media{height:170px;position:relative;display:flex;align-items:center;justify-content:center;font-size:2.6rem;overflow:hidden}
+  .card-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .card-tag{position:absolute;top:12px;left:12px;background:rgba(255,255,255,.9);color:var(--green);font-size:.7rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:.28rem .7rem;border-radius:999px;z-index:2}
+  .card-body{padding:18px 20px 22px;display:flex;flex-direction:column;flex:1}
+  .card h3{font-size:1.2rem;margin-bottom:.35rem}
+  .card .desc{font-size:.9rem;color:var(--ink-soft);flex:1;margin-bottom:1rem}
+  .card-foot{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+  .price{font-family:'Fraunces',serif;font-weight:600;font-size:1.35rem;color:var(--ink)}
+  .price small{font-family:'Manrope',sans-serif;font-size:.78rem;font-weight:600;color:var(--ink-soft)}
+  .add{background:var(--green);color:#fff;border:none;width:42px;height:42px;border-radius:12px;cursor:pointer;font-size:1.4rem;line-height:1;transition:.2s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .add:hover{background:var(--gold);transform:rotate(90deg)}
+
+  /* ---------- Cart drawer ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(38,34,29,.45);opacity:0;visibility:hidden;transition:.3s;z-index:60}
+  .overlay.open{opacity:1;visibility:visible}
+  .drawer{
+    position:fixed;top:0;right:0;height:100%;width:400px;max-width:90vw;background:var(--bg);
+    z-index:70;transform:translateX(100%);transition:.35s cubic-bezier(.4,0,.2,1);
+    display:flex;flex-direction:column;box-shadow:var(--shadow-lg);
+  }
+  .drawer.open{transform:translateX(0)}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:22px;border-bottom:1px solid var(--line)}
+  .drawer-head h3{font-size:1.4rem}
+  .close-btn{background:none;border:none;font-size:1.6rem;cursor:pointer;color:var(--ink-soft);line-height:1}
+  .cart-items{flex:1;overflow-y:auto;padding:14px 22px}
+  .cart-empty{text-align:center;color:var(--ink-soft);padding:60px 10px}
+  .cart-empty svg{width:54px;height:54px;color:var(--line);margin-bottom:12px}
+  .ci{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .ci-media{width:58px;height:58px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+  .ci-info{flex:1;min-width:0}
+  .ci-info h4{font-size:.98rem;font-weight:700;margin-bottom:.15rem}
+  .ci-info .ci-price{font-size:.85rem;color:var(--ink-soft)}
+  .qty{display:inline-flex;align-items:center;gap:.4rem;margin-top:.5rem;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.2rem}
+  .qty button{width:26px;height:26px;border:none;background:none;cursor:pointer;font-size:1.1rem;color:var(--ink);border-radius:999px;line-height:1}
+  .qty button:hover{background:var(--line)}
+  .qty span{min-width:20px;text-align:center;font-weight:700;font-size:.9rem}
+  .ci-remove{background:none;border:none;color:var(--ink-soft);cursor:pointer;font-size:.8rem;text-decoration:underline;align-self:flex-start}
+  .drawer-foot{padding:20px 22px;border-top:1px solid var(--line);background:var(--surface)}
+  .drawer-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1rem;font-weight:700}
+  .drawer-total .t{font-family:'Fraunces',serif;font-size:1.5rem}
+
+  /* ---------- Product page ---------- */
+  .product-view{display:none}
+  .product-view.active{display:block}
+  .crumbs{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;color:var(--ink-soft);font-size:.88rem;font-weight:600;margin-bottom:22px}
+  .crumbs button{background:none;border:none;color:var(--ink-soft);cursor:pointer;font:inherit;padding:0}
+  .crumbs button:hover{color:var(--gold-deep)}
+  .crumbs span{color:var(--line)}
+  .crumbs .cur{color:var(--ink)}
+  .pd-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+  .pd-media{position:relative;border-radius:var(--radius);overflow:hidden;min-height:420px;display:flex;align-items:center;justify-content:center;font-size:6rem;box-shadow:var(--shadow)}
+  .pd-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .pd-media .card-tag{top:18px;left:18px;font-size:.75rem}
+  .pd-info .pd-cat{font-weight:700;font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:.7rem}
+  .pd-info h1{font-size:clamp(1.9rem,3.6vw,2.6rem);margin-bottom:.5rem}
+  .pd-price{font-family:'Fraunces',serif;font-weight:600;font-size:2rem;color:var(--ink);margin:.4rem 0 1.2rem}
+  .pd-price small{font-family:'Manrope',sans-serif;font-size:.95rem;font-weight:600;color:var(--ink-soft)}
+  .pd-long{color:var(--ink-soft);font-size:1.02rem;margin-bottom:1.6rem;padding-bottom:1.6rem;border-bottom:1px solid var(--line)}
+  .pd-features{list-style:none;display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.8rem}
+  .pd-features li{display:flex;align-items:flex-start;gap:.7rem;font-size:.96rem;font-weight:500}
+  .pd-features svg{width:20px;height:20px;color:var(--green-soft);flex-shrink:0;margin-top:2px}
+  .pd-buy{display:flex;gap:.9rem;align-items:center;flex-wrap:wrap}
+  .qty-lg{display:inline-flex;align-items:center;gap:.6rem;background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:.35rem}
+  .qty-lg button{width:38px;height:38px;border:none;background:none;cursor:pointer;font-size:1.4rem;color:var(--ink);border-radius:999px;line-height:1}
+  .qty-lg button:hover{background:var(--line)}
+  .qty-lg span{min-width:28px;text-align:center;font-weight:700;font-size:1.05rem}
+  .pd-note{display:flex;align-items:center;gap:.5rem;color:var(--ink-soft);font-size:.85rem;margin-top:1.4rem}
+  .pd-note svg{width:16px;height:16px;color:var(--green-soft);flex-shrink:0}
+  .related{margin-top:70px}
+  .related h2{font-size:1.6rem;margin-bottom:24px}
+
+  /* ---------- Checkout ---------- */
+  .checkout{display:none}
+  .checkout.active{display:block}
+  .catalog-view.hidden{display:none}
+  .back-link{display:inline-flex;align-items:center;gap:.4rem;color:var(--ink-soft);font-weight:600;font-size:.92rem;cursor:pointer;margin-bottom:20px;background:none;border:none}
+  .back-link:hover{color:var(--gold-deep)}
+  .checkout-grid{display:grid;grid-template-columns:1.3fr .85fr;gap:34px;align-items:start}
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .panel h3{font-size:1.3rem;margin-bottom:.3rem}
+  .panel .hint{color:var(--ink-soft);font-size:.9rem;margin-bottom:20px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-weight:600;font-size:.85rem;margin-bottom:.4rem}
+  .field input,.field select,.field textarea{
+    width:100%;font-family:'Manrope',sans-serif;font-size:.95rem;padding:.8rem .9rem;
+    border:1.5px solid var(--line);border-radius:var(--radius-sm);background:var(--bg);color:var(--ink);transition:.2s;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);background:#fff}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .pay-options{display:flex;flex-direction:column;gap:10px;margin-bottom:8px}
+  .pay-opt{display:flex;align-items:center;gap:12px;border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:.85rem 1rem;cursor:pointer;transition:.2s}
+  .pay-opt:hover{border-color:var(--gold)}
+  .pay-opt input{width:auto;accent-color:var(--green)}
+  .pay-opt span{font-weight:600;font-size:.95rem}
+  .summary{position:sticky;top:92px}
+  .summary .s-item{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+  .summary .s-item .n{color:var(--ink-soft)}
+  .summary .s-item .n b{color:var(--ink);font-weight:700;display:block}
+  .s-line{display:flex;justify-content:space-between;padding:8px 0;color:var(--ink-soft);font-size:.95rem}
+  .s-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:14px;margin-top:6px;border-top:2px solid var(--ink);font-weight:800}
+  .s-total .amt{font-family:'Fraunces',serif;font-size:1.7rem;font-weight:700}
+  .secure-note{display:flex;align-items:center;gap:.5rem;color:var(--ink-soft);font-size:.82rem;margin-top:16px;justify-content:center}
+  .secure-note svg{width:16px;height:16px;color:var(--green-soft)}
+
+  /* ---------- Confirmation ---------- */
+  .confirm{display:none;text-align:center;max-width:34rem;margin:40px auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:50px 34px}
+  .confirm.active{display:block}
+  .confirm .check{width:76px;height:76px;border-radius:999px;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:2.4rem}
+  .confirm h2{font-size:2rem;margin-bottom:.6rem}
+  .confirm p{color:var(--ink-soft);margin-bottom:1.6rem}
+  .confirm .order-id{font-weight:700;color:var(--ink)}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--green);color:#e8e0d3;padding:56px 0 30px;margin-top:40px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:34px;margin-bottom:36px}
+  footer .logo{color:#fff;margin-bottom:.7rem}
+  footer .logo small{color:rgba(232,224,211,.7)}
+  footer p{color:rgba(232,224,211,.75);font-size:.92rem;max-width:22rem}
+  footer h4{font-family:'Manrope',sans-serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(232,224,211,.55);margin-bottom:1rem}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+  footer ul a{color:rgba(232,224,211,.85);font-size:.92rem}
+  footer ul a:hover{color:var(--gold)}
+  .foot-bottom{border-top:1px solid rgba(232,224,211,.15);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.85rem;color:rgba(232,224,211,.6)}
+
+  .toast{position:fixed;bottom:-100px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:.85rem 1.4rem;border-radius:999px;font-weight:600;font-size:.92rem;z-index:90;transition:bottom .35s ease;box-shadow:var(--shadow-lg);pointer-events:none}
+  .toast.show{bottom:24px;pointer-events:auto}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:900px){
+    .hero-inner{grid-template-columns:1fr;padding:44px 0 40px}
+    .hero-art{min-height:280px;order:-1}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .checkout-grid{grid-template-columns:1fr}
+    .summary{position:static}
+    .foot-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:620px){
+    .nav-links{
+      position:fixed;top:72px;left:0;right:0;background:var(--bg);flex-direction:column;
+      gap:0;padding:0 22px;border-bottom:1px solid var(--line);
+      max-height:0;overflow:hidden;transition:max-height .3s ease;
+    }
+    .nav-links.open{max-height:340px;padding:10px 22px 20px}
+    .nav-links a{width:100%;padding:.7rem 0;border-bottom:1px solid var(--line)}
+    .nav-links .btn{margin-top:10px}
+    .menu-toggle{display:block}
+    .grid{grid-template-columns:1fr}
+    .row2{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr;gap:26px}
+    .hero h1{font-size:2.1rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo" onclick="showCatalog();return false;">Glow<span class="dot">Well</span><small>Wellness</small></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#catalog" onclick="filterCat('all');closeMenu()">Shop</a>
+      <a href="#catalog" onclick="filterCat('Memberships');closeMenu()">Memberships</a>
+      <a href="#catalog" onclick="filterCat('Spa');closeMenu()">Spa</a>
+      <a href="#catalog" onclick="filterCat('Salon');closeMenu()">Salon</a>
+      <a href="#catalog" onclick="filterCat('Packages');closeMenu()">Packages</a>
+    </nav>
+    <div style="display:flex;align-items:center;gap:.6rem">
+      <button class="cart-btn" onclick="openCart()" aria-label="Open cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount" style="display:none">0</span>
+      </button>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CATALOG VIEW ============ -->
+<div class="catalog-view" id="catalogView">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">Gym · Spa · Salon · Wellness</span>
+        <h1>Look good.<br/>Feel <em>well.</em></h1>
+        <p>Book memberships, spa rituals, salon treatments and wellness packages — all in one place. Your glow starts here.</p>
+        <div class="hero-cta">
+          <a href="#catalog" class="btn btn-primary" onclick="filterCat('all')">Shop Services</a>
+          <a href="#catalog" class="btn btn-ghost" onclick="filterCat('Packages')">View Packages</a>
+        </div>
+      </div>
+      <div class="hero-art" id="heroArt">
+        <img src="images/hero.jpg" alt="GlowWell wellness studio" onerror="this.remove()" />
+        <div class="hero-badge">
+          <strong>Elite Wellness</strong>
+          <span>Full day spa + salon experience — $450</span>
+        </div>
+      </div>
+    </div>
+    <div class="wrap trust">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> Certified trainers & therapists</div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> No joining fee this month</div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg> 15% student & senior discount</div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <main id="catalog">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Explore our services</h2>
+        <p>Pick what your body and mind need today. Add to cart and check out in minutes.</p>
+      </div>
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </main>
+</div>
+
+<!-- ============ PRODUCT VIEW ============ -->
+<div class="product-view" id="productView">
+  <div class="wrap" style="padding-top:34px">
+    <nav class="crumbs" id="crumbs"></nav>
+    <div class="pd-grid" id="pdGrid"></div>
+    <section class="related">
+      <h2>You may also like</h2>
+      <div class="grid" id="relatedGrid"></div>
+    </section>
+  </div>
+</div>
+
+<!-- ============ CHECKOUT VIEW ============ -->
+<div class="checkout" id="checkoutView">
+  <div class="wrap" style="padding-top:40px">
+    <button class="back-link" onclick="showCatalog()">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg> Continue shopping
+    </button>
+    <div class="section-head" style="text-align:left;margin:0 0 26px;max-width:none">
+      <h2>Checkout</h2>
+    </div>
+    <form class="checkout-grid" id="checkoutForm" onsubmit="placeOrder(event)">
+      <div>
+        <div class="panel" style="margin-bottom:24px">
+          <h3>Contact details</h3>
+          <p class="hint">We'll send your booking confirmation here.</p>
+          <div class="row2">
+            <div class="field"><label>First name</label><input required placeholder="Ava" /></div>
+            <div class="field"><label>Last name</label><input required placeholder="Bennett" /></div>
+          </div>
+          <div class="field"><label>Email</label><input type="email" required placeholder="you@email.com" /></div>
+          <div class="field"><label>Phone</label><input type="tel" required placeholder="+1 (555) 000-0000" /></div>
+        </div>
+
+        <div class="panel" style="margin-bottom:24px">
+          <h3>Preferred visit</h3>
+          <p class="hint">Optional — pick a date and studio for services that need booking.</p>
+          <div class="row2">
+            <div class="field"><label>Date</label><input type="date" /></div>
+            <div class="field">
+              <label>Studio</label>
+              <select><option>GlowWell Downtown</option><option>GlowWell Riverside</option><option>GlowWell Uptown</option></select>
+            </div>
+          </div>
+          <div class="field"><label>Notes for our team</label><textarea rows="2" placeholder="Any preferences or requests…"></textarea></div>
+        </div>
+
+        <div class="panel">
+          <h3>Payment</h3>
+          <p class="hint">This is a demo — no real payment is processed.</p>
+          <div class="pay-options">
+            <label class="pay-opt"><input type="radio" name="pay" checked /><span>💳 Credit / Debit card</span></label>
+            <label class="pay-opt"><input type="radio" name="pay" /><span>🅿️ PayPal</span></label>
+            <label class="pay-opt"><input type="radio" name="pay" /><span>🏦 Pay in studio</span></label>
+          </div>
+          <div class="row2" style="margin-top:14px">
+            <div class="field" style="grid-column:1/-1"><label>Card number</label><input placeholder="4242 4242 4242 4242" /></div>
+            <div class="field"><label>Expiry</label><input placeholder="MM / YY" /></div>
+            <div class="field"><label>CVC</label><input placeholder="123" /></div>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="panel summary">
+          <h3 style="margin-bottom:1rem">Order summary</h3>
+          <div id="summaryItems"></div>
+          <div class="s-line"><span>Subtotal</span><span id="sumSubtotal">$0</span></div>
+          <div class="s-line"><span>Tax (8%)</span><span id="sumTax">$0</span></div>
+          <div class="s-total"><span>Total</span><span class="amt" id="sumTotal">$0</span></div>
+          <button type="submit" class="btn btn-gold btn-block" style="margin-top:20px">Place order</button>
+          <div class="secure-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Secure SSL checkout
+          </div>
+        </div>
+      </aside>
+    </form>
+  </div>
+</div>
+
+<!-- ============ CONFIRMATION ============ -->
+<div class="confirm" id="confirmView">
+  <div class="wrap">
+    <div class="check">✓</div>
+    <h2>Thank you!</h2>
+    <p>Your order <span class="order-id" id="orderId"></span> is confirmed. A confirmation has been sent to your email. We can't wait to help you glow.</p>
+    <button class="btn btn-primary" onclick="showCatalog()">Back to shop</button>
+  </div>
+</div>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer" aria-label="Shopping cart">
+  <div class="drawer-head">
+    <h3>Your cart</h3>
+    <button class="close-btn" onclick="closeCart()" aria-label="Close">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="drawer-foot" id="drawerFoot">
+    <div class="drawer-total"><span>Subtotal</span><span class="t" id="drawerTotal">$0</span></div>
+    <button class="btn btn-gold btn-block" onclick="goCheckout()">Checkout</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">Glow<span class="dot" style="color:var(--gold)">Well</span><small>Wellness</small></div>
+        <p>Gym, spa, salon and wellness under one roof. Certified professionals, thoughtful spaces, and a glow that lasts.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#catalog" onclick="filterCat('Memberships')">Memberships</a></li>
+          <li><a href="#catalog" onclick="filterCat('Spa')">Spa</a></li>
+          <li><a href="#catalog" onclick="filterCat('Salon')">Salon</a></li>
+          <li><a href="#catalog" onclick="filterCat('Training')">Training</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Gym: Mon–Fri 5AM–11PM</li>
+          <li>Gym: Sat–Sun 7AM–9PM</li>
+          <li>Spa & Salon: Daily 9AM–8PM</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:hello@glowwell.com">hello@glowwell.com</a></li>
+          <li><a href="tel:+15550000000">+1 (555) 000-0000</a></li>
+          <li><a href="#">glowwell.com/gifts</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 GlowWell Wellness. All rights reserved.</span>
+      <span>Cancel 24h ahead to avoid fees · No-show policy applies</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- Product data (from GlowWell knowledge base) ---------- */
+const PRODUCTS = [
+  {id:'mem-basic', cat:'Memberships', name:'Basic Membership', desc:'Full gym access, open 7 days a week. No joining fee this month.', price:49, unit:'/mo', emoji:'🏋️', bg:'linear-gradient(135deg,#eae2d3,#d8cbb4)', tag:'Popular',
+    meta:'Gym access · Monthly',
+    long:'Everything you need to get moving. The Basic Membership gives you unlimited access to our fully-equipped gym floor, seven days a week. No joining fee during our current promotion — choose month-to-month flexibility, or save 15% with an annual contract.',
+    features:['Unlimited gym floor access','Open Mon–Fri 5AM–11PM · Sat–Sun 7AM–9PM','No joining fee this month','Month-to-month or annual (save 15%)','15% off for students & seniors with valid ID']},
+  {id:'mem-premium', cat:'Memberships', name:'Premium Membership', desc:'Gym access plus unlimited group classes.', price:89, unit:'/mo', emoji:'🤸', bg:'linear-gradient(135deg,#e7d8c4,#d3bfa3)',
+    meta:'Gym + Classes · Monthly',
+    long:'Step it up with everything in Basic plus unlimited group classes — from strength and HIIT to yoga and mobility. Perfect if you love variety and the energy of training alongside others.',
+    features:['Everything in Basic Membership','Unlimited group fitness classes','Priority class booking','No joining fee this month','15% off for students & seniors']},
+  {id:'mem-elite', cat:'Memberships', name:'Elite Membership', desc:'Gym, classes and monthly spa credits.', price:129, unit:'/mo', emoji:'⭐', bg:'linear-gradient(135deg,#e6dcc9,#cbb892)', tag:'Best value',
+    meta:'Gym + Classes + Spa · Monthly',
+    long:'Our most complete membership. Enjoy full gym access, unlimited classes, and monthly spa credits to spend on massages, facials and more. Train hard, recover well — all under one roof.',
+    features:['Everything in Premium Membership','Monthly spa credits included','Complimentary recovery amenities','No joining fee this month','15% off for students & seniors']},
+
+  {id:'spa-30', cat:'Spa', name:'Spa Session · 30 min', desc:'Swedish or deep tissue massage to reset your day.', price:45, unit:'', emoji:'💆', bg:'linear-gradient(135deg,#e9d9cf,#dcc3b3)',
+    meta:'30 minutes · Spa',
+    long:'A focused 30-minute escape. Choose a Swedish or deep tissue massage to ease tension and reset your day. Ideal for a lunch-break reset or a first taste of the GlowWell Spa.',
+    features:['Choice of Swedish or deep tissue massage','Robes and slippers provided','Please arrive 10 minutes early','Bookable up to 30 days in advance']},
+  {id:'spa-60', cat:'Spa', name:'Spa Session · 60 min', desc:'Hot stone, deep tissue or body wrap therapy.', price:85, unit:'', emoji:'🌿', bg:'linear-gradient(135deg,#e3d6cd,#cdb7a6)', tag:'Popular',
+    meta:'60 minutes · Couples available',
+    long:'A full hour to truly unwind. Select from hot stone therapy, deep tissue massage or a nourishing body wrap. Available as a couples session so you can relax together.',
+    features:['Hot stone, deep tissue or body wrap','Couples session available','Robes and slippers provided','Please arrive 10 minutes early']},
+  {id:'spa-90', cat:'Spa', name:'Spa Session · 90 min', desc:'The full ritual — massage, wrap and facial finish.', price:120, unit:'', emoji:'🧖', bg:'linear-gradient(135deg,#e8dccf,#d0bda2)',
+    meta:'90 minutes · Couples available',
+    long:'The complete spa ritual. Ninety unhurried minutes combining massage, a body wrap and a facial finish for head-to-toe renewal. Also available as a couples session.',
+    features:['Massage + body wrap + facial finish','Couples session available','Robes and slippers provided','Please arrive 10 minutes early']},
+
+  {id:'salon-cut', cat:'Salon', name:'Haircut & Blowout', desc:'Precision cut and a fresh, polished blowout.', price:65, unit:'', emoji:'✂️', bg:'linear-gradient(135deg,#e6dacb,#d2c0a4)',
+    meta:'Salon · Cut & style',
+    long:'A precision cut tailored to you, finished with a smooth, polished blowout. Our stylists shape and style to suit your hair and lifestyle. Arrive with dry hair unless your stylist advises otherwise.',
+    features:['Consultation with your stylist','Precision cut','Professional blowout finish','Arrive with dry hair unless told otherwise']},
+  {id:'salon-color', cat:'Salon', name:'Hair Coloring', desc:'Full colour, highlights or balayage by our stylists.', price:140, unit:'from', emoji:'🎨', bg:'linear-gradient(135deg,#e9d6c8,#d6b9a0)',
+    meta:'Salon · 2–3 hours',
+    long:'Rich, dimensional colour by our expert team — full colour, highlights or balayage. Coloring typically takes 2–3 hours. Please avoid washing your hair for 24 hours before your appointment for best results.',
+    features:['Full colour, highlights or balayage','Typically 2–3 hours','Avoid washing hair 24h before','Includes finishing blowout']},
+  {id:'salon-keratin', cat:'Salon', name:'Keratin Treatment', desc:'Smoothing keratin & scalp treatment for lasting shine.', price:180, unit:'', emoji:'💇', bg:'linear-gradient(135deg,#e5d8c6,#cdb693)',
+    meta:'Salon · Smoothing',
+    long:'Tame frizz and add lasting shine with our smoothing keratin treatment, paired with a nourishing scalp treatment for healthy, glossy hair that lasts for weeks.',
+    features:['Smoothing keratin treatment','Nourishing scalp treatment','Long-lasting frizz control','Aftercare advice from your stylist']},
+
+  {id:'pkg-relax', cat:'Packages', name:'Relaxation Package', desc:'60-min massage plus a rejuvenating facial.', price:199, unit:'', emoji:'🕯️', bg:'linear-gradient(135deg,#e4d5c9,#cbb59d)',
+    meta:'Package · Spa',
+    long:'Our signature unwind. A 60-minute massage followed by a rejuvenating facial — the perfect reset for body and skin. Available as a gift card too.',
+    features:['60-minute massage','Rejuvenating facial','Robes and slippers provided','Available as a gift card']},
+  {id:'pkg-glow', cat:'Packages', name:'Glow Package', desc:'Massage, facial and a finishing blowout.', price:299, unit:'', emoji:'✨', bg:'linear-gradient(135deg,#e8d6bf,#d3b783)', tag:'Bestseller',
+    meta:'Package · Spa + Salon',
+    long:'Look and feel radiant. This bestselling package pairs a massage and facial with a finishing blowout, so you leave relaxed and camera-ready. Available as a gift card.',
+    features:['Massage','Facial','Finishing blowout','Available as a gift card']},
+  {id:'pkg-elite', cat:'Packages', name:'Elite Wellness Day', desc:'A full day of spa and salon indulgence.', price:450, unit:'', emoji:'👑', bg:'linear-gradient(135deg,#e6d4b4,#caa85f)',
+    meta:'Package · Full day',
+    long:'The ultimate indulgence — a full day combining our spa and salon experiences. Massage, facial, treatments and styling, all in one unhurried day of self-care. Available as a gift card.',
+    features:['Full-day spa experience','Full salon styling','Massage, facial & treatments','Available as a gift card']},
+
+  {id:'pt-1', cat:'Training', name:'Personal Training · Single', desc:'One 60-min session with a certified trainer.', price:75, unit:'', emoji:'💪', bg:'linear-gradient(135deg,#e6ddcd,#cdbc9a)',
+    meta:'1 session · 60 min',
+    long:'One 60-minute session with a certified personal trainer, built around your goals. Great for trying personal training or fine-tuning your form and program.',
+    features:['60 minutes one-on-one','Certified personal trainer','Personalised to your goals','Book up to 30 days in advance']},
+  {id:'pt-5', cat:'Training', name:'Personal Training · 5-Pack', desc:'Five 60-min sessions — save $25 versus single.', price:350, unit:'', emoji:'🔥', bg:'linear-gradient(135deg,#e3d8c3,#c9b58c)',
+    meta:'5 sessions · Save $25',
+    long:'Five 60-minute sessions with a certified trainer, so you can build real momentum. You save $25 compared with booking single sessions.',
+    features:['5 × 60-minute sessions','Certified personal trainer','Save $25 vs. single sessions','Structured progression plan']},
+  {id:'pt-10', cat:'Training', name:'Personal Training · 10-Pack', desc:'Ten 60-min sessions — save $100 versus single.', price:650, unit:'', emoji:'🏆', bg:'linear-gradient(135deg,#e6d8bd,#c8ab6b)', tag:'Save $100',
+    meta:'10 sessions · Save $100',
+    long:'Our best training value. Ten 60-minute sessions with a certified trainer to reach your goals and lock in lasting habits — saving you $100 versus single sessions.',
+    features:['10 × 60-minute sessions','Certified personal trainer','Save $100 vs. single sessions','Full progression & accountability']},
+
+  {id:'gift', cat:'Gift Cards', name:'GlowWell Gift Card', desc:'Give the gift of wellness — redeemable on any service.', price:100, unit:'', emoji:'🎁', bg:'linear-gradient(135deg,#e9d3c4,#d9b39a)',
+    meta:'Gift card · Any service',
+    long:'Give the gift of wellness. Our gift cards are redeemable on any GlowWell service or package — memberships, spa, salon and more. Delivered ready to gift.',
+    features:['Redeemable on any service or package','Never expires','Delivered ready to gift','Purchase in-studio or online']},
+];
+
+const CATS = ['all','Memberships','Spa','Salon','Packages','Training','Gift Cards'];
+const CAT_LABELS = {all:'All', Memberships:'Memberships', Spa:'Spa', Salon:'Salon', Packages:'Packages', Training:'Training', 'Gift Cards':'Gift Cards'};
+
+let cart = JSON.parse(localStorage.getItem('glowwell_cart') || '{}');
+let activeCat = 'all';
+
+/* ---------- Render filters + grid ---------- */
+function renderFilters(){
+  document.getElementById('filters').innerHTML = CATS.map(c =>
+    `<button class="chip ${c===activeCat?'active':''}" onclick="filterCat('${c}')">${CAT_LABELS[c]}</button>`
+  ).join('');
+}
+function renderGrid(){
+  const list = activeCat==='all' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===activeCat);
+  document.getElementById('grid').innerHTML = list.map(cardHTML).join('');
+}
+function cardHTML(p){
+  return `
+    <article class="card">
+      <div class="card-media" style="background:${p.bg};cursor:pointer" onclick="showProduct('${p.id}')">
+        <img src="images/${p.id}.jpg" alt="${p.name}" loading="lazy" onerror="this.remove()" />
+        ${p.tag?`<span class="card-tag">${p.tag}</span>`:''}
+        <span>${p.emoji}</span>
+      </div>
+      <div class="card-body">
+        <h3 style="cursor:pointer" onclick="showProduct('${p.id}')">${p.name}</h3>
+        <p class="desc">${p.desc}</p>
+        <div class="card-foot">
+          <span class="price">$${p.price}${p.unit?` <small>${p.unit}</small>`:''}</span>
+          <button class="add" onclick="addToCart('${p.id}')" aria-label="Add ${p.name}">+</button>
+        </div>
+      </div>
+    </article>`;
+}
+function filterCat(c){
+  activeCat = c;
+  renderFilters(); renderGrid();
+  showCatalog();
+  document.getElementById('catalog').scrollIntoView({behavior:'smooth'});
+}
+
+/* ---------- Cart logic ---------- */
+function saveCart(){ localStorage.setItem('glowwell_cart', JSON.stringify(cart)); }
+function addToCart(id, qty){
+  qty = qty || 1;
+  cart[id] = (cart[id]||0) + qty;
+  saveCart(); updateCartUI();
+  const p = PRODUCTS.find(x=>x.id===id);
+  toast(`${p.name} added to cart`);
+  const badge = document.getElementById('cartCount');
+  badge.style.transform='scale(1.4)'; setTimeout(()=>badge.style.transform='scale(1)',180);
+}
+function changeQty(id,delta){
+  cart[id]=(cart[id]||0)+delta;
+  if(cart[id]<=0) delete cart[id];
+  saveCart(); updateCartUI(); renderSummary();
+}
+function removeItem(id){ delete cart[id]; saveCart(); updateCartUI(); renderSummary(); }
+function cartEntries(){ return Object.keys(cart).map(id=>({p:PRODUCTS.find(x=>x.id===id),q:cart[id]})).filter(e=>e.p); }
+function cartTotal(){ return cartEntries().reduce((s,e)=>s+e.p.price*e.q,0); }
+function cartCount(){ return cartEntries().reduce((s,e)=>s+e.q,0); }
+
+function updateCartUI(){
+  const count = cartCount();
+  const badge = document.getElementById('cartCount');
+  badge.textContent = count;
+  badge.style.display = count>0 ? 'flex':'none';
+
+  const wrap = document.getElementById('cartItems');
+  const entries = cartEntries();
+  if(entries.length===0){
+    wrap.innerHTML = `<div class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+      <p>Your cart is empty.</p></div>`;
+    document.getElementById('drawerFoot').style.display='none';
+  } else {
+    document.getElementById('drawerFoot').style.display='block';
+    wrap.innerHTML = entries.map(({p,q})=>`
+      <div class="ci">
+        <div class="ci-media" style="background:${p.bg}">${p.emoji}</div>
+        <div class="ci-info">
+          <h4>${p.name}</h4>
+          <div class="ci-price">$${p.price}${p.unit||''} each</div>
+          <div class="qty">
+            <button onclick="changeQty('${p.id}',-1)" aria-label="Decrease">−</button>
+            <span>${q}</span>
+            <button onclick="changeQty('${p.id}',1)" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <div style="text-align:right;display:flex;flex-direction:column;justify-content:space-between">
+          <strong>$${p.price*q}</strong>
+          <button class="ci-remove" onclick="removeItem('${p.id}')">Remove</button>
+        </div>
+      </div>`).join('');
+    document.getElementById('drawerTotal').textContent = '$'+cartTotal().toLocaleString();
+  }
+}
+
+/* ---------- Drawer ---------- */
+function openCart(){ document.getElementById('drawer').classList.add('open'); document.getElementById('overlay').classList.add('open'); }
+function closeCart(){ document.getElementById('drawer').classList.remove('open'); document.getElementById('overlay').classList.remove('open'); }
+
+/* ---------- View switching ---------- */
+function hideAllViews(){
+  document.getElementById('catalogView').classList.add('hidden');
+  document.getElementById('productView').classList.remove('active');
+  document.getElementById('checkoutView').classList.remove('active');
+  document.getElementById('confirmView').classList.remove('active');
+}
+function showCatalog(){
+  hideAllViews();
+  document.getElementById('catalogView').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function goCheckout(){
+  if(cartCount()===0){ toast('Your cart is empty'); return; }
+  closeCart();
+  hideAllViews();
+  document.getElementById('checkoutView').classList.add('active');
+  renderSummary();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- Product page ---------- */
+let pdQty = 1;
+let currentPid = null;
+function showProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  pdQty = 1;
+  currentPid = id;
+  closeCart(); closeMenu();
+  hideAllViews();
+  document.getElementById('productView').classList.add('active');
+
+  document.getElementById('crumbs').innerHTML =
+    `<button onclick="showCatalog()">Home</button><span>/</span>`+
+    `<button onclick="filterCat('${p.cat}')">${p.cat}</button><span>/</span>`+
+    `<span class="cur">${p.name}</span>`;
+
+  const tick = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>`;
+  document.getElementById('pdGrid').innerHTML = `
+    <div class="pd-media" style="background:${p.bg}">
+      <img src="images/${p.id}.jpg" alt="${p.name}" onerror="this.remove()" />
+      ${p.tag?`<span class="card-tag">${p.tag}</span>`:''}
+      <span>${p.emoji}</span>
+    </div>
+    <div class="pd-info">
+      <div class="pd-cat">${p.meta||p.cat}</div>
+      <h1>${p.name}</h1>
+      <div class="pd-price">$${p.price}${p.unit?` <small>${p.unit}</small>`:''}</div>
+      <p class="pd-long">${p.long||p.desc}</p>
+      <ul class="pd-features">${(p.features||[]).map(f=>`<li>${tick}<span>${f}</span></li>`).join('')}</ul>
+      <div class="pd-buy">
+        <div class="qty-lg">
+          <button onclick="pdChange(-1)" aria-label="Decrease">−</button>
+          <span id="pdQty">1</span>
+          <button onclick="pdChange(1)" aria-label="Increase">+</button>
+        </div>
+        <button class="btn btn-primary" onclick="pdAdd()">Add to cart</button>
+        <button class="btn btn-gold" onclick="pdBuy()">Buy now</button>
+      </div>
+      <div class="pd-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        Free cancellation up to 24 hours before your appointment.
+      </div>
+    </div>`;
+
+  const related = PRODUCTS.filter(x=>x.cat===p.cat && x.id!==p.id).slice(0,3);
+  const pool = related.length ? related : PRODUCTS.filter(x=>x.id!==p.id).slice(0,3);
+  document.getElementById('relatedGrid').innerHTML = pool.map(cardHTML).join('');
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function pdChange(d){ pdQty = Math.max(1, pdQty+d); document.getElementById('pdQty').textContent = pdQty; }
+function pdAdd(){ if(currentPid) addToCart(currentPid, pdQty); }
+function pdBuy(){ if(currentPid){ addToCart(currentPid, pdQty); goCheckout(); } }
+function renderSummary(){
+  const entries = cartEntries();
+  document.getElementById('summaryItems').innerHTML = entries.map(({p,q})=>`
+    <div class="s-item">
+      <span class="n"><b>${p.name}</b>Qty ${q}${p.unit?` · ${p.unit}`:''}</span>
+      <span>$${(p.price*q).toLocaleString()}</span>
+    </div>`).join('');
+  const sub = cartTotal();
+  const tax = Math.round(sub*0.08);
+  document.getElementById('sumSubtotal').textContent = '$'+sub.toLocaleString();
+  document.getElementById('sumTax').textContent = '$'+tax.toLocaleString();
+  document.getElementById('sumTotal').textContent = '$'+(sub+tax).toLocaleString();
+}
+function placeOrder(e){
+  e.preventDefault();
+  const id = 'GW-' + Math.floor(100000 + Math.random()*900000);
+  document.getElementById('orderId').textContent = '#'+id;
+  cart = {}; saveCart(); updateCartUI();
+  hideAllViews();
+  document.getElementById('confirmView').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- Menu + toast ---------- */
+function toggleMenu(){ document.getElementById('navLinks').classList.toggle('open'); }
+function closeMenu(){ document.getElementById('navLinks').classList.remove('open'); }
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'),2200);
+}
+
+/* ---------- Init ---------- */
+renderFilters(); renderGrid(); updateCartUI();
+</script>
+
+<script type="text/javascript">
+  (function(d, t) {
+      var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+      v.onload = function() {
+        window.voiceflow.chat.load({
+          verify: { projectID: '6a2c7747a0c570b69f38d294' },
+          url: 'https://general-runtime.voiceflow.com',
+          voice: {
+            url: "https://runtime-api.voiceflow.com"
+          }
+        });
+      }
+      v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+  })(document, 'script');
+</script>
+</body>
+</html>
